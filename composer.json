@@ -1,0 +1,22 @@
+{
+    "name": "virbo/yii2-wsfeeder",
+    "description": "Library for Webservice PDDIKTI Feeder",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","feeder","pddikti","ws","webservice","siakad"],
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Yusuf Ayuba",
+            "email": "yusuf@dutainformasi.net"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.13",
+        "yiisoft/yii2-httpclient": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "virbo\\wsfeeder\\src\\": ""
+        }
+    }
+}
