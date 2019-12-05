@@ -125,7 +125,7 @@ class Feeder extends Component
             } else {
                 if ($request->data['error_code'] === 100) {
                     $session = Yii::$app->session;
-                    $session['token'] == null;
+                    $session['token'] = null;
                     $this->getToken();
                 } else {
                     throw new BadRequestHttpException('Error '.$request->data['error_code'].' - '.$request->data['error_desc']);
