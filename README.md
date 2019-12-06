@@ -6,8 +6,8 @@
     <br>
 </p>
 
-#Installasi
-
+Installasi
+----------
 Pastikan Anda telah menginstall [Composer](http://getcomposer.org/). Jika belum, silahkan install terlebih dahulu dengan mengikuti instruksi yang ada di [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix)
 
 Jalankan perintah
@@ -29,8 +29,8 @@ php composer.phar update
 ```
 
 
-#Cara menggunakan
-
+Cara menggunakan
+----------------
 Tambahkan konfigurasi berikut ke file `main.php` atau `main-local.php` atau `web.php`
 
 ```php
@@ -63,8 +63,8 @@ Secara default, database yang terkoneksi adalah database `live`. Jika ingin meng
 
 Untuk menggunakannya cukup mudah. Berikut beberapa contoh
 
-GetDictionary
--------------
+### GetDictionary
+
 ```php
 /*
  * mengambil dictionary dari setiap method. dalam contoh ini akan 
@@ -80,8 +80,8 @@ public function actionDictionary()
 }
 ```
 
-View Data
----------
+### View Data
+
 ```php
 /*
  * menampilkan data mahasiswa sebanyak 10 data.
@@ -99,8 +99,8 @@ public function actionListData()
 }
 ```
 
-Filter data
------------
+### Filter data
+
 ```php
 /*
  * Filter data mahasiswa berdasarkan id mahasiswa (untuk list field2 yang
@@ -119,8 +119,8 @@ public function actionFilterData()
 }
 ```
 
-Insert Data
------------
+### Insert Data
+
 ```php
 /*
  * Insert data. dalam contoh ini insert biodata mahasiswa menggunakan
@@ -181,8 +181,8 @@ public function actionInsertData()
 }
 ```
 
-Update Data
------------
+### Update Data
+
 ```php
 /*
  * Update data berdasarkan id. Dalam contoh ini update data mahasiswa berdasarkan ID mahasiswa
@@ -203,8 +203,8 @@ public function actionUpdateData()
 }
 ```
 
-Delete data
------------
+### Delete data
+
 ```php
 /*
  * Delete data. dalam contoh ini menghapus data mahasiswa berdasarkan ID mahasiswa
@@ -228,7 +228,7 @@ Dengan menggunakan function `actFeeder` kita dapat menampilkan `dictionary` dari
 Daftar lengkap method-method dapat dilihat melalui halaman [http://alamat_feeder/ws/live2.php](http://alamat_feeder/ws/live2.php) atau [http://alamat_feeder/ws/sandbox2.php](http://alamat_feeder/ws/sandbox2.php) 
 
 Diskusi
--------------
+--------
 Jika ada yang ingin di diskusikan, jangan sungkan untuk menghubungi saya baik lewat email maupun social media saya.
 
 - [Email](yusuf@dutainformasi.net)
