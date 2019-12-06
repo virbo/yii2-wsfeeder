@@ -99,8 +99,6 @@ class Feeder extends Component
      * */
     public function actFeeder($data = [])
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-
         if (!is_array($data)) {
             throw new BadRequestHttpException('Data must array');
         }
