@@ -122,9 +122,7 @@ class Feeder extends Component
                 return $request->data;
             } else {
                 if ($request->data['error_code'] === 100) {
-                    $session = Yii::$app->session;
-                    $session['token'] == null;
-                    $this->getToken();
+                    $this->getToken($renew = true);
                 } else {
                     throw new BadRequestHttpException('Error '.$request->data['error_code'].' - '.$request->data['error_desc']);
                 }
@@ -134,11 +132,11 @@ class Feeder extends Component
         }
     }
 
-    protected function getToken()
+    protected function getToken($renew = false)
     {
         $session = Yii::$app->session;
 
-        if ($session['token'] === null) {
+        if ($session['token'] === null || $renew) {
             $act = Json::encode([
                 'act' => 'GetToken',
                 'username' => $this->username,
