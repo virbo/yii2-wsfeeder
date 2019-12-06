@@ -121,7 +121,7 @@ class Feeder extends Component
             if ($request->data['error_code'] == 0) {
                 return $request->data;
             } else {
-                if ($request->data['error_code'] === 100) {
+                if ($request->data['error_code'] == 100) {
                     $this->getToken($renew = true);
                 } else {
                     throw new BadRequestHttpException('Error '.$request->data['error_code'].' - '.$request->data['error_desc']);
