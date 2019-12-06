@@ -1,6 +1,6 @@
 <?php
 
-namespace virbo\wsfeeder\src;
+namespace virbo\wsfeeder;
 
 use Yii;
 use yii\base\Component;
