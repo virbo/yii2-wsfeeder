@@ -99,8 +99,6 @@ class Feeder extends Component
      * */
     public function actFeeder($data = [])
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-
         if (!is_array($data)) {
             throw new BadRequestHttpException('Data must array');
         }
@@ -123,10 +121,8 @@ class Feeder extends Component
             if ($request->data['error_code'] == 0) {
                 return $request->data;
             } else {
-                if ($request->data['error_code'] === 100) {
-                    $session = Yii::$app->session;
-                    $session['token'] = null;
-                    $this->getToken();
+                if ($request->data['error_code'] == 100) {
+                    $this->getToken($renew = true);
                 } else {
                     throw new BadRequestHttpException('Error '.$request->data['error_code'].' - '.$request->data['error_desc']);
                 }
@@ -136,11 +132,11 @@ class Feeder extends Component
         }
     }
 
-    protected function getToken()
+    protected function getToken($renew = false)
     {
         $session = Yii::$app->session;
 
-        if ($session['token'] === null) {
+        if ($session['token'] === null || $renew) {
             $act = Json::encode([
                 'act' => 'GetToken',
                 'username' => $this->username,
