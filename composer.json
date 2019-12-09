@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "virbo\\wsfeeder\\src\\": ""
+            "virbo\\wsfeeder\\": "src/"
         }
     }
 }
