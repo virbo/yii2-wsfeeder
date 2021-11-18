@@ -2,13 +2,11 @@
 
 namespace virbo\wsfeeder;
 
-use Yii;
 use yii\base\Component;
 use yii\helpers\ArrayHelper;
 use yii\httpclient\client;
 use yii\web\BadRequestHttpException;
 use yii\helpers\Json;
-use yii\web\Response;
 
 /**
  * just simple configuration as component
@@ -110,7 +108,7 @@ class Feeder extends Component
         $data = ArrayHelper::merge($data, $token);
 
         $request = $this->_client->createRequest()
-            ->setUrl('/'.$mode)
+            ->setUrl('/' . $mode)
             ->addHeaders(['content-type' => $this->contentType])
             ->setContent(Json::encode($data))
             ->setMethod($this->method)
@@ -124,7 +122,7 @@ class Feeder extends Component
                 if ($request->data['error_code'] == 100) {
                     $this->getToken($renew = true);
                 } else {
-                    throw new BadRequestHttpException('Error '.$request->data['error_code'].' - '.$request->data['error_desc']);
+                    throw new BadRequestHttpException('Error ' . $request->data['error_code'] . ' - ' . $request->data['error_desc']);
                 }
             }
         } else {
@@ -134,39 +132,29 @@ class Feeder extends Component
 
     protected function getToken($renew = false)
     {
-        $session = Yii::$app->session;
+        $act = Json::encode([
+            'act' => 'GetToken',
+            'username' => $this->username,
+            'password' => $this->password
+        ]);
 
-        if ($session['token'] === null || $renew) {
-            $act = Json::encode([
-                'act' => 'GetToken',
-                'username' => $this->username,
-                'password' => $this->password
-            ]);
+        $mode = $this->mode == 0 ? 'live2.php' : 'sandbox2.php';
 
-            $mode = $this->mode == 0 ? 'live2.php' : 'sandbox2.php';
+        $request = $this->_client->createRequest()
+            ->setUrl($mode)
+            ->addHeaders(['content-type' => $this->contentType])
+            ->setContent($act)
+            ->setMethod($this->method)
+            ->send();
 
-            $request = $this->_client->createRequest()
-                ->setUrl($mode)
-                ->addHeaders(['content-type' => $this->contentType])
-                ->setContent($act)
-                ->setMethod($this->method)
-                ->send();
-
-            if ($request) {
-                if ($request->data['error_code'] == 0) {
-                    //$this->_token = $request->data['data']['token'];
-                    $session['token'] = $request->data['data']['token'];
-                } else {
-                    throw new BadRequestHttpException('Error '.$request->data['error_code'].' - '.$request->data['error_desc']);
-                }
+        if ($request) {
+            if ($request->data['error_code'] == 0) {
+                $this->_token = $request->data['data']['token'];
             } else {
-                throw new BadRequestHttpException();
+                throw new BadRequestHttpException('Error ' . $request->data['error_code'] . ' - ' . $request->data['error_desc']);
             }
-
-            $this->_token = $session['token'];
         } else {
-            $this->_token = $session['token'];
+            throw new BadRequestHttpException();
         }
     }
-
 }
