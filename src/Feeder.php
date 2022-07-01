@@ -122,11 +122,12 @@ class Feeder extends Component
                 if ($request->data['error_code'] == 100) {
                     $this->getToken($renew = true);
                 } else {
-                    throw new BadRequestHttpException('Error ' . $request->data['error_code'] . ' - ' . $request->data['error_desc']);
+                    //throw new BadRequestHttpException('Error ' . $request->data['error_code'] . ' - ' . $request->data['error_desc']);
+                    return 'Error ' . $request->data['error_code'] . ' - ' . $request->data['error_desc'];
                 }
             }
         } else {
-            throw new BadRequestHttpException();
+            throw new BadRequestHttpException('Error request');
         }
     }
 
@@ -151,10 +152,11 @@ class Feeder extends Component
             if ($request->data['error_code'] == 0) {
                 $this->_token = $request->data['data']['token'];
             } else {
-                throw new BadRequestHttpException('Error ' . $request->data['error_code'] . ' - ' . $request->data['error_desc']);
+                //throw new BadRequestHttpException('Error ' . $request->data['error_code'] . ' - ' . $request->data['error_desc']);
+                return 'Error ' . $request->data['error_code'] . ' - ' . $request->data['error_desc'];
             }
         } else {
-            throw new BadRequestHttpException();
+            throw new BadRequestHttpException('Error request');
         }
     }
 }
